@@ -49,9 +49,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             obj = ['', '']
             for key in objs:
-                obj = [objs[key]['class'], objs[key]['id']]
+                obj = [objs[key]['__class__'], objs[key]['id']]
                 if obj == args:
-                    print("[{}] ({}) {}".format(objs[key]['class'],
+                    print("[{}] ({}) {}".format(objs[key]['__class__'],
                                                 objs[key]['id'], objs[key]))
                     return
             print("** no instance found **")
@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             obj = ['', '']
             for key in objs:
-                obj = [objs[key]['class'], objs[key]['id']]
+                obj = [objs[key]['__class__'], objs[key]['id']]
                 if obj == args:
                     del objs[key]
                     f.save()
@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
         ls = []
         if arg == "":
             for key in objs:
-                string = "[{}] ({}) {}".format(objs[key]['class'],
+                string = "[{}] ({}) {}".format(objs[key]['__class__'],
                                                objs[key]['id'], objs[key])
                 ls.append(string)
             print(ls)
@@ -96,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
             for key in objs:
                 cl = key.split(".")
                 if cl[0] == arg:
-                    string = "[{}] ({}) {}".format(objs[key]['class'],
+                    string = "[{}] ({}) {}".format(objs[key]['__class__'],
                                                    objs[key]['id'], objs[key])
                     ls.append(string)
             print(ls)
