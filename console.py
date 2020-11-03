@@ -116,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
             for key in objs:
                 obj = key.split(".")
                 if obj[0] == args[0] and obj[1] == args[1]:
-                    objs[key][args[2]] = type(objs[key][args[2]])(args[3])
+                    objs[key][args[2]] = args[3]
                     f.save()
 
 
