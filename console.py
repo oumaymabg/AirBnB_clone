@@ -4,12 +4,16 @@ import sys
 import json
 from models.engine.file_storage import FileStorage
 
+
 class idClasses:
     from models.base_model import BaseModel
     from models.engine.file_storage import FileStorage
 
+
 class HBNBCommand(cmd.Cmd):
+
     prompt = '(hbnb) '
+
     def do_quit(self, arg):
         "Quit command to exit the program\n"
         exit()
@@ -43,11 +47,12 @@ class HBNBCommand(cmd.Cmd):
         elif (len(args) < 2):
             print("** instance id missing **")
         else:
-            obj = ['','']
+            obj = ['', '']
             for key in objs:
                 obj = [objs[key]['class'], objs[key]['id']]
                 if obj == args:
-                    print("[{}] ({}) {}".format(objs[key]['class'], objs[key]['id'], objs[key]))
+                    print("[{}] ({}) {}".format(objs[key]['class'],
+                                                objs[key]['id'], objs[key]))
                     return
             print("** no instance found **")
 
@@ -64,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
         elif (len(args) < 2):
             print("** instance id missing **")
         else:
-            obj = ['','']
+            obj = ['', '']
             for key in objs:
                 obj = [objs[key]['class'], objs[key]['id']]
                 if obj == args:
@@ -81,7 +86,8 @@ class HBNBCommand(cmd.Cmd):
         ls = []
         if arg == "":
             for key in objs:
-                string = "[{}] ({}) {}".format(objs[key]['class'], objs[key]['id'], objs[key])
+                string = "[{}] ({}) {}".format(objs[key]['class'],
+                                               objs[key]['id'], objs[key])
                 ls.append(string)
             print(ls)
         elif(not hasattr(idClasses, arg)):
@@ -90,7 +96,8 @@ class HBNBCommand(cmd.Cmd):
             for key in objs:
                 cl = key.split(".")
                 if cl[0] == arg:
-                    string = "[{}] ({}) {}".format(objs[key]['class'], objs[key]['id'], objs[key])
+                    string = "[{}] ({}) {}".format(objs[key]['class'],
+                                                   objs[key]['id'], objs[key])
                     ls.append(string)
             print(ls)
 
