@@ -104,8 +104,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif(not hasattr(idClasses, args[0])):
             print("** class doesn't exist **")
-        elif (len(args) < 2):
+        elif(len(args) < 2):
             print("** instance id missing **")
+        elif not(args[0]+"."+args[1] in objs):
+                print("** no instance found **")
         elif (len(args) < 3):
             print("** attribute name missing **")
         elif (len(args) < 4):
@@ -114,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
             for key in objs:
                 obj = key.split(".")
                 if obj[0] == args[0] and obj[1] == args[1]:
-                    objs[key][args[2]] = args[3]
+                    objs[key][args[2]] = type(objs[key][args[2]])(args[3])
                     f.save()
 
 
