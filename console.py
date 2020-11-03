@@ -19,6 +19,7 @@ class HBNBCommand(cmd.Cmd):
         exit()
 
     def do_create(self, arg):
+        "Holder\n"
         if(arg == ""):
             print("** class name missing **")
         elif(not hasattr(idClasses, arg)):
@@ -30,6 +31,7 @@ class HBNBCommand(cmd.Cmd):
             print(new.id)
 
     def do_show(self, arg):
+        "Holder\n"
         f = FileStorage()
         f.reload()
         objs = f.all()
@@ -50,6 +52,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_destroy(self, arg):
+        "Holder\n"
         f = FileStorage()
         f.reload()
         objs = f.all()
@@ -71,6 +74,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
+        "Holder\n"
         f = FileStorage()
         f.reload()
         objs = f.all()
@@ -91,6 +95,7 @@ class HBNBCommand(cmd.Cmd):
             print(ls)
 
     def do_update(self, arg):
+        "Holder\n"
         f = FileStorage()
         f.reload()
         objs = f.all()
