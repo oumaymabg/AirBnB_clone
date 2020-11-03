@@ -3,7 +3,6 @@
 """
 import json
 import os
-from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -18,23 +17,16 @@ class FileStorage:
 
     def new(self, obj):
         """ holder """
-        self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
+        self.__objects[obj.__class__.__name__ + "." + obj.id] = obj.to_dict()
 
     def save(self):
         """ holder """
-        dic = {}
-        for k, v in self.__objects.items():
-            dic[k] = v.to_dict()
         with open(self.__file_path, 'w') as f:
-            json.dump(dic, f)
+            json.dump(self.__objects, f)
         f.close()
 
     def reload(self):
         """ holder """
-        idclasses = {'BaseModel': BaseModel}
-        data = {}
         if(os.stat(self.__file_path).st_size is not 0):
             with open(self.__file_path) as json_file:
-                data = json.load(json_file)
-                for key, value in data.items():
-                    self.__objects[key] = idclasses[value['__class__']](value)
+                self.__objects = json.load(json_file)
