@@ -4,6 +4,7 @@
 import json
 import os
 from models.base_model import BaseModel
+from models.user import User
 
 class FileStorage:
     """ storage Object
@@ -32,7 +33,7 @@ class FileStorage:
 
     def reload(self):
         """ holder """
-        idclasses = {'BaseModel': BaseModel}
+        idclasses = {'BaseModel': BaseModel, 'User': User}
         data = {}
         if(os.stat(self.__file_path).st_size is not 0):
             with open(self.__file_path) as json_file:
