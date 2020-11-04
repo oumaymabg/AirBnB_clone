@@ -5,6 +5,12 @@ import json
 import os
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 class FileStorage:
     """ storage Object
@@ -21,7 +27,7 @@ class FileStorage:
     def new(self, obj):
         """ holder """
         self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
- 
+
     def save(self):
         """ holder """
         dic = {}
@@ -33,11 +39,15 @@ class FileStorage:
 
     def reload(self):
         """ holder """
-        idclasses = {'BaseModel': BaseModel, 'User': User}
+        idclasses = {
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Review': Review
+            }
         data = {}
         if(os.stat(self.__file_path).st_size is not 0):
             with open(self.__file_path) as json_file:
-                data = json.load(json_file) 
+                data = json.load(json_file)
                 for key, value in data.items():
-                    self.__objects[key] = idclasses[value['__class__']](**value)
-                
+                    self.__objects[key] = idclasses[value
+                                  ['__class__']](**value)
