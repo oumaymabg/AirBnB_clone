@@ -1,11 +1,17 @@
 #!/usr/bin/python3
-"""holder"""
 import cmd
 import sys
+import json
+from models.engine.file_storage import FileStorage
+
+
+class idClasses:
+    from models.base_model import BaseModel
+    from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
-"""holder"""
+
     prompt = '(hbnb) '
 
     def do_quit(self, arg):
@@ -13,8 +19,112 @@ class HBNBCommand(cmd.Cmd):
         exit()
 
     def do_EOF(self, arg):
-        "Quit command to exit the program\n"
+        "Quit the program when EOF\n"
         exit()
+
+    def do_create(self, arg):
+        "Holder\n"
+        if(arg == ""):
+            print("** class name missing **")
+        elif(not hasattr(idClasses, arg)):
+            print("** class doesn't exist **")
+        else:
+            targetClass = getattr(idClasses, arg)
+            new = targetClass()
+            new.save()
+            print(new.id)
+
+    def do_show(self, arg):
+        "Holder\n"
+        f = FileStorage()
+        f.reload()
+        objs = f.all()
+        args = arg.split()
+        if(arg == ""):
+            print("** class name missing **")
+        elif (not hasattr(idClasses, args[0])):
+            print("** class doesn't exist **")
+        elif (len(args) < 2):
+            print("** instance id missing **")
+        else:
+            obj = ['', '']
+            for key in objs:
+                obj = [objs[key]['__class__'], objs[key]['id']]
+                if obj == args:
+                    print("[{}] ({}) {}".format(objs[key]['__class__'],
+                                                objs[key]['id'], objs[key]))
+                    return
+            print("** no instance found **")
+
+    def do_destroy(self, arg):
+        "Holder\n"
+        f = FileStorage()
+        f.reload()
+        objs = f.all()
+        args = arg.split()
+        if(arg == ""):
+            print("** class name missing **")
+        elif(not hasattr(idClasses, args[0])):
+            print("** class doesn't exist **")
+        elif (len(args) < 2):
+            print("** instance id missing **")
+        else:
+            obj = ['', '']
+            for key in objs:
+                obj = [objs[key]['__class__'], objs[key]['id']]
+                if obj == args:
+                    del objs[key]
+                    f.save()
+                    return
+            print("** no instance found **")
+
+    def do_all(self, arg):
+        "Holder\n"
+        f = FileStorage()
+        f.reload()
+        objs = f.all()
+        ls = []
+        if arg == "":
+            for key in objs:
+                string = "[{}] ({}) {}".format(objs[key]['__class__'],
+                                               objs[key]['id'], objs[key])
+                ls.append(string)
+            print(ls)
+        elif(not hasattr(idClasses, arg)):
+            print("** class doesn't exist **")
+        else:
+            for key in objs:
+                cl = key.split(".")
+                if cl[0] == arg:
+                    string = "[{}] ({}) {}".format(objs[key]['__class__'],
+                                                   objs[key]['id'], objs[key])
+                    ls.append(string)
+            print(ls)
+
+    def do_update(self, arg):
+        "Holder\n"
+        f = FileStorage()
+        f.reload()
+        objs = f.all()
+        args = arg.split()
+        if(arg == ""):
+            print("** class name missing **")
+        elif(not hasattr(idClasses, args[0])):
+            print("** class doesn't exist **")
+        elif(len(args) < 2):
+            print("** instance id missing **")
+        elif not(args[0]+"."+args[1] in objs):
+                print("** no instance found **")
+        elif (len(args) < 3):
+            print("** attribute name missing **")
+        elif (len(args) < 4):
+            print("** value missing **")
+        else:
+            for key in objs:
+                obj = key.split(".")
+                if obj[0] == args[0] and obj[1] == args[1]:
+                    objs[key][args[2]] = args[3]
+                    f.save()
 
 
 if __name__ == "__main__":
