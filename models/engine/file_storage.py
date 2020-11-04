@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """storage class
 """
-
-
 import json
 import os
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -17,7 +16,11 @@ class FileStorage:
 
     def all(self):
         """ holder """
-        return self.__objects
+        idclasses={'BaseModel':BaseModel}
+        dic = {}
+        for key, value in self.__objects.items():
+            dic[key] = idclasses[value['__class__']](**value)
+        return dic
 
     def new(self, obj):
         """ holder """
