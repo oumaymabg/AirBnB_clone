@@ -38,6 +38,8 @@ class BaseModel:
         new = self.__dict__.copy()
         new['__class__'] = self.__class__.__name__
         if not(type(new['updated_at']) is str):
-            new['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
-            new['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+            new['updated_at'] = self.updated_at.strftime(
+                "%Y-%m-%dT%H:%M:%S.%f")
+            new['created_at'] = self.created_at.strftime(
+                "%Y-%m-%dT%H:%M:%S.%f")
         return new
