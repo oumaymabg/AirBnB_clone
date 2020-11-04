@@ -2,8 +2,7 @@
 #### Project to be done in teams of 2 people:
 ###### Abderrahmen Hidoussi, Oumayma Bougossa
 ## AirBnB clone:Higher-level programming
-!("https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20201104%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20201104T084800Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=de40986a337d2b219675ed21bd51298ec28c03b3293fd79fcbc83470e9ed1db2")
-:red_circle:###Welcome to the AirBnB clone project! (The Holberton B&B)
+![](“logohbnb.png”)
 
 >##### I know you were waiting for it: it’s here!
 
